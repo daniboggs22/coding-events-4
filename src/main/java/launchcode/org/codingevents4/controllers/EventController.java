@@ -1,5 +1,6 @@
 package launchcode.org.codingevents4.controllers;
 
+import launchcode.org.codingevents4.data.EventData;
 import launchcode.org.codingevents4.models.Event;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,20 +15,21 @@ import java.util.List;
 @Controller
 @RequestMapping("events")
 public class EventController {
-private static List<Event> events = new ArrayList<>();
     @GetMapping
     public String displayAllEvents(Model model) {
-        model.addAttribute("events", events);
+        model.addAttribute("title", "All Events");
+        model.addAttribute("events", EventData.getAll());
         return "events/index";
     }
     //lives at Events/create
     @GetMapping("create")
-    public String renderCreateEventForm(){
+    public String displayCreateEventForm(Model model){
+        model.addAttribute("title", "Create Event");
         return "events/create";
     }
     @PostMapping("create")
-    public String createEvent(@RequestParam String eventName, @RequestParam String eventDescription){
-        events.add(new Event(eventName, eventDescription));
+    public String processCreateEventForm(@RequestParam String eventName, @RequestParam String eventDescription){
+        EventData.add(new Event(eventName, eventDescription));
         return "redirect:";
 }
 
