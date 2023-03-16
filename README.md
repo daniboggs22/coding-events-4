@@ -1,5 +1,4 @@
 # coding-events-4
-ch.13 exercises
 The purpose of the app:
 An app to view and add coding Events available to attend with the option to add your own categories and events.
 
